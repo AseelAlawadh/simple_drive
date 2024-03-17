@@ -10,4 +10,5 @@
 
 Blob.create([
               {data: 'This is the first blob'},
+              {data: 'This is the secand blob'},
             ])
