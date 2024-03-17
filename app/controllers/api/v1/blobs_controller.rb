@@ -1,11 +1,13 @@
 class Api::V1::BlobsController < ApplicationController
-  before_action :set_blob, only: [:show, :update, :destroy]
+  before_action :authenticate_request
+  before_action :set_blob, only: [:show, :destroy]
+
 
   # index renders all the blobs in the table
   # GET /blobs
   def index
     @blobs = Blob.all
-    render json: @blobs,  status: :ok
+    render json: @blobs, status: :ok
   end
 
   # # This
@@ -27,16 +29,8 @@ class Api::V1::BlobsController < ApplicationController
     @blobs = Blob.new(
       data: post_params[:data])
     if @blobs.save
-      render json: @blobs, status: :created, location: @blobs
-    else
-      render json: @blobs.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /blobs/:id
-  def update
-    if @blobs.update(post_params)
-      render json: @blobs
+      # render json: @blobs, status: :created, location:api_v1_blob_url(@blob)
+      render json: @blobs, status: :created
     else
       render json: @blobs.errors, status: :unprocessable_entity
     end

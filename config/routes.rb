@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
-      resources :blobs , only: [:index, :create, :show, :update, :destroy]
-      resources :blobs, param: :uuid
+      post '/signup', to: 'authentication#signup'
+      post '/login', to: 'authentication#login'
+      resources :blobs, only: [:index, :create, :show, :destroy]
+      resources :blobs, param: :id
+
     end
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,4 +15,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
 end
