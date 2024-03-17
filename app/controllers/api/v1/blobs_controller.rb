@@ -8,18 +8,13 @@ class Api::V1::BlobsController < ApplicationController
   # GET /blobs
   def index
     @blobs = Blob.all
-    render json: @blobs, status: :ok
   end
 
-  # # This
-  # method looks up the data by the uuid,
-  # if found render the json object
-  #  Otherwise render an error object.
   # GET /blobs/:id
   def show
     @blob = Blob.find_by(id: params[:id])
     if @blob
-      render json: @blob, status: :ok
+      render 'show', formats: [:json], handlers: [:jbuilder], status: :ok
     else
       render json: { error: "Blob not found." }, status: :not_found
     end
@@ -42,8 +37,8 @@ class Api::V1::BlobsController < ApplicationController
           render json: @blob.errors, status: :unprocessable_entity
         end
       rescue ArgumentError => e
-        # If the Base64 content is  invalid
-        render json: { error: 'Invalid file content ' }, status: :bad_request
+        # If the Base64 content is invalid
+        render json: { error: 'Invalid file content' }, status: :bad_request
       end
     else
       render json: { error: 'File is missing' }, status: :bad_request
