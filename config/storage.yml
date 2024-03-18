@@ -34,9 +34,10 @@ local:
 #   mirrors: [ amazon, google, microsoft ]
 oci:
   service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:oci, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:oci, :secret_access_key) %>
-  region: "me-jeddah-1"
-  bucket: "simple_drive_demo"
-  endpoint: "https://axirkxghbsq3.compat.objectstorage.me-jeddah-1.oraclecloud.com"
+  access_key_id: <%=ENV['OCI_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['OCI_SECRET_ACCESS_KEY'] %>
+  region: <%= ENV['OCI_REGION'] %>
+  bucket: <% ENV['OCI_BUCKET_NAME'] %>>
+  #  endpoint: "https://axirkxghbsq3.compat.objectstorage.me-jeddah-1.oraclecloud.com"
+  endpoint: "https://<%= ENV['OCI_NAMESPACE'] %>.compat.objectstorage.<%= ENV['OCI_REGION'] %>.oraclecloud.com"
   force_path_style: true
