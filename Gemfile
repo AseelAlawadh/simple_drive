@@ -41,7 +41,6 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-
 gem 'jwt'
 # For securely hashing passwords
 gem 'bcrypt', '~> 3.1.7'
@@ -72,3 +71,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
+end
+

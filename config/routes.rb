@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :blobs, only: [:index, :create, :show, :destroy]
       resources :blobs, param: :id
 
+      resources :s3uploaders, only: [:index, :show]
     end
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
